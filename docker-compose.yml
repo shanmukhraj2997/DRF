@@ -1,0 +1,26 @@
+services:
+  drf_project:
+    build: ./drf_project
+    ports:
+      - "8000:8000"
+    depends_on:
+    - db
+  frontend:
+    build: ./react-project/lms
+    ports:
+      - "5173:5173"
+    depends_on:
+    - drf_project
+  db:
+    image: postgres:18
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=lms_db
+      - POSTGRES_USER=lms_user
+      - POSTGRES_PASSWORD=sunny1234
+volumes:
+  postgres_data:
