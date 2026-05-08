@@ -24,7 +24,6 @@ jobs:
                     --health-retries 3
 
         env:
-            SECRET_KEY: ${{ secrets.SECRET_KEY }}
             POSTGRES_DB: lms_db
             POSTGRES_USER: lms_user
             POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
