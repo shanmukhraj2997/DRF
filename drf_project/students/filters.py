@@ -1,5 +1,5 @@
 import django_filters
-from .models import Student
+from students.models import Student
 
 class StudentFilter(django_filters.FilterSet):
     branch = django_filters.CharFilter(field_name="branch",
