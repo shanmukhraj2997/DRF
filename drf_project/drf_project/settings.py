@@ -107,11 +107,17 @@ import os
 # Construct local default DATABASE_URL if not provided
 default_db_url = f"postgresql://{config('POSTGRES_USER', default='lms_user')}:{config('POSTGRES_PASSWORD', default='sunny1234')}@{config('POSTGRES_HOST', default='localhost')}:{config('POSTGRES_PORT', default='5432')}/{config('POSTGRES_DB', default='lms_db')}"
 
+database_url = config('DATABASE_URL', default=default_db_url)
+
+# Disable SSL when connecting to localhost/127.0.0.1, running in CI, or in DEBUG mode
+is_local_host = "localhost" in database_url or "127.0.0.1" in database_url
+is_ci = config('CI', default=False, cast=bool)
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=default_db_url),
+        default=database_url,
         conn_max_age=600,
-        ssl_require=not DEBUG
+        ssl_require=False if (is_local_host or is_ci or DEBUG) else True
     )
 }
 
