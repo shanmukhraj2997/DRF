@@ -110,3 +110,15 @@ jobs:
                 context: ./react-project/lms
                 push: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/lms-frontend:latest
+    
+    deploy:
+        runs-on: ubuntu-latest
+        needs: [build-push] #runs only if build-push is successful
+
+        steps:
+            - name: Deploy Backend to render
+              run: |
+                curl -X POST ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
+            - name: Deploy Frontend to render
+              run: |
+                curl -X POST ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
