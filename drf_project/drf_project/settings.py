@@ -104,11 +104,14 @@ import os
 #     }
 # }
 
+# Construct local default DATABASE_URL if not provided
+default_db_url = f"postgresql://{config('POSTGRES_USER', default='lms_user')}:{config('POSTGRES_PASSWORD', default='sunny1234')}@{config('POSTGRES_HOST', default='localhost')}:{config('POSTGRES_PORT', default='5432')}/{config('POSTGRES_DB', default='lms_db')}"
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
+        default=config('DATABASE_URL', default=default_db_url),
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=not DEBUG
     )
 }
 

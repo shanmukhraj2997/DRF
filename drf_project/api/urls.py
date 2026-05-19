@@ -1,5 +1,5 @@
 from django.urls import path, include
-from students import views
+from . import views
 from rest_framework.routers import DefaultRouter
 from accounts.views import RegisterView, DashboardView, LoginView, RefreshView, LogoutView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
