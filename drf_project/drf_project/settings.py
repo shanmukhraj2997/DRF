@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-&saig#zfj37vlrtg*gmc&1drr_vwqo4&*lg@e9=bm+(u3^5t12
 DEBUG = config("DEBUG", default=False, cast=bool)  
 
 ALLOWED_HOSTS = [
-    "onrender.com", # app1.onrender.com
+    "localhost:8000",    
+    ".onrender.com", # app1.onrender.com
     config("RENDER_EXTERNAL_HOSTNAME", default="")
 ]
 
@@ -165,17 +166,23 @@ CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
-    "https://lms-frontend-nw6p.onrender.com"
+    "https://lms-frontend-w2ya.onrender.com"
 ]
 
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://lms-frontend-nw6p.onrender.com"
+    "https://lms-frontend-w2ya.onrender.com"
 ]
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SAMESITE = "None"
+
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),

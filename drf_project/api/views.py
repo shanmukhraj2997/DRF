@@ -3,13 +3,15 @@ from django.http import JsonResponse, Http404
 from teachers.models import Teacher
 from students.models import Student
 from mentors.models import Mentor
-from .serializers import TeacherSerializer, StudentSerializer, MentorSerializer
+from teachers.serializers import TeacherSerializer
+from students.serializers import StudentSerializer
+from mentors.serializers import MentorSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import mixins, generics, viewsets
-from .paginations import StudentPagination
+from students.paginations import StudentPagination
 from students.filters import StudentFilter
 from mentors.filters import MentorFilter
 from rest_framework.filters import SearchFilter, OrderingFilter
