@@ -37,17 +37,12 @@ jobs:
             - name: Set up Python
               uses: actions/setup-python@v5
               with:
-                python-version: "3.12"
+                python-version: "3.14"
 
             - name: Install dependencies
               run: |
                 cd drf_project
                 pip install -r requirements.txt
-
-            - name: Run migrations
-              run: |
-                cd drf_project
-                python manage.py migrate
 
             - name: Run tests
               run: |
