@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
+from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 
@@ -38,18 +39,25 @@ class LoginView(APIView):
 
         response = Response({"message": "Login Successful"})
 
+        cookie_secure = not settings.DEBUG
+        cookie_samesite = 'None' if not settings.DEBUG else 'Lax'
+
         response.set_cookie(
             key="access_token",
             value=str(access),
             httponly=True,
-            secure=False # Make True in production
+            secure=cookie_secure,
+            samesite=cookie_samesite,
+            path='/'
         )
 
         response.set_cookie(
             key="refresh_token",
             value=str(refresh),
             httponly=True,
-            secure=False
+            secure=cookie_secure,
+            samesite=cookie_samesite,
+            path='/'
         )
 
         return response
@@ -67,11 +75,16 @@ class RefreshView(APIView):
 
             response = Response({"message": "Token refreshed"})
 
+            cookie_secure = not settings.DEBUG
+            cookie_samesite = 'None' if not settings.DEBUG else 'Lax'
+
             response.set_cookie(
                 key='access_token',
                 value=str(access),
                 httponly=True,
-                secure=False
+                secure=cookie_secure,
+                samesite=cookie_samesite,
+                path='/'
             )
 
             return response
