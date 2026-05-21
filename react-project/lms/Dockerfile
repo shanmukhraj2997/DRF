@@ -14,4 +14,5 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.config /etc/nginx/conf.d/default.conf
 COPY render-env.sh /usr/share/nginx/html/render-env.sh
+RUN chmod +x /usr/share/nginx/html/render-env.sh
 CMD ["sh", "-c", "/usr/share/nginx/html/render-env.sh && nginx -g 'daemon off;' "]
