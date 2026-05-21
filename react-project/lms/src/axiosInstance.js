@@ -36,9 +36,11 @@ axiosInstance.interceptors.response.use(
                 return axiosInstance(originalRequest) // send the updated request to the API
             } catch(error) {
                 // Handle Error
+                console.error(error)
                 window.location.href = '/login'
             }
         }
+        console.error(error)
         return Promise.reject(error)
     }
 )

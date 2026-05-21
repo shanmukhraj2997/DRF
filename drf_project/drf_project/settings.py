@@ -26,10 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&saig#zfj37vlrtg*gmc&1drr_vwqo4&*lg@e9=bm+(u3^5t12'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False, cast=bool)  
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    "localhost:8000",    
+    "localhost:8000",
     ".onrender.com", # app1.onrender.com
     config("RENDER_EXTERNAL_HOSTNAME", default="")
 ]
@@ -58,7 +58,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Add after SecurityMiddleware 
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Add after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,28 +90,23 @@ WSGI_APPLICATION = 'drf_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-import os
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': config("POSTGRES_DB"),
 #         'USER': config("POSTGRES_USER"),
 #         'PASSWORD': config("POSTGRES_PASSWORD"),
-#         #'HOST': 'host.docker.internal', for connecting to local
-#         'HOST': config("POSTGRES_HOST"), # for connecting to docker
-#         'PORT': config("POSTGRES_PORT")
+#         # 'HOST': 'host.docker.internal', -> for connecting to local DB from container
+#         'HOST': config("POSTGRES_HOST"),
+#         'PORT': config("POSTGRES_PORT"),
 #     }
 # }
 
-# Construct local default DATABASE_URL if not provided
-default_db_url = f"postgresql://{config('POSTGRES_USER', default='lms_user')}:{config('POSTGRES_PASSWORD', default='sunny1234')}@{config('POSTGRES_HOST', default='localhost')}:{config('POSTGRES_PORT', default='5432')}/{config('POSTGRES_DB', default='lms_db')}"
-
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=default_db_url),
+        default=config('DATABASE_URL'),
         conn_max_age=600,
-        ssl_require=not DEBUG
+        ssl_require=True
     )
 }
 
@@ -149,7 +144,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS  = []
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -165,17 +162,17 @@ REST_FRAMEWORK = {'DEFAULT_PAGINATION_CLASS':
                   'DEFAULT_AUTHENTICATION_CLASSES': ['accounts.authentication.CookieJWTAuthentication']
                   }
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True # Allows the browser to send cookies along with cross-origin requests
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
-    "https://lms-frontend-w2ya.onrender.com"
+    "https://lms-frontend-cuhs.onrender.com"
 ]
 
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://lms-frontend-w2ya.onrender.com"
+    "https://lms-frontend-cuhs.onrender.com"
 ]
 
 CSRF_COOKIE_SECURE = True

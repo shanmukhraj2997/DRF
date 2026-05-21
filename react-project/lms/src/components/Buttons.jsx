@@ -1,11 +1,11 @@
 const Button = () => {
   const handleClick = (message) => {
-     alert("Button Clicked!")
+     alert(message)
   }
 
   return (
     <>
-        <button onClick={handleClick("Thank you for clicking!")}>
+        <button onClick={() => handleClick("Thank you for clicking!")}>
           Click Me
         </button>
     </>

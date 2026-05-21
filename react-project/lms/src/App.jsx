@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import HelloWorld from "./components/Hello"
 import Teachers from "./components/Teachers"
@@ -30,16 +30,6 @@ import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 
 function App() {
-  let id = 1001
-  const receiveData = (data) => {
-    console.log("Data from child:", data); 
-  };
-  const students = [
-    {id: 1, name: "Amit", marks: 81},
-    {id: 2, name: "Neha", marks: 74},
-    {id: 3, name: "Karan", marks: 91},
-    {id: 4, name: "Arjun", marks: 88},
-  ]
   const studentName = "John"
 
   return (

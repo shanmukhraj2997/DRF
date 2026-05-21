@@ -14,6 +14,7 @@ const AuthProvider = ({children}) => {
         await axiosInstance.get("/dashboard-protected/")
         setIsLoggedIn(true)
       } catch(error) {
+        console.error(error)
         setIsLoggedIn(false)
       } finally {
         setLoading(false)

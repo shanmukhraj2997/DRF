@@ -2,27 +2,28 @@ import { useState, useRef } from 'react'
 
 const InputBox = () => {
   const [name, setName] = useState("")
-  const refElement = useRef("")
-  console.log(refElement)
+  const [previousName, setPreviousName] = useState("")
+  const refElement = useRef(null)
   const previousNameRef = useRef("")
 
   const clearText = () => {
     setName("")
-    refElement.current.focus()
+    if (refElement.current) refElement.current.focus()
   }
 
   const handleInput= (e) => {
     previousNameRef.current = name
+    setPreviousName(previousNameRef.current)
     setName(e.target.value)
   }
   return (
     <>
         <h2>Inputing values</h2>
-        <input ref={refElement} type='text'value={name} 
+        <input ref={refElement} type='text' value={name} 
         onChange={handleInput}/>
         <button onClick={clearText}>Clear</button>
         <br/>
-        <p>Previous Name: {previousNameRef.current}</p>
+        <p>Previous Name: {previousName}</p>
         <p>Current Name: {name}</p>
     </>
   )
