@@ -13,4 +13,5 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.config /etc/nginx/conf.d/default.conf
-CMD ["nginx", "-g", "daemon off;"]
+COPY render-env.sh /usr/share/nginx/html/render-env.sh
+CMD ["sh", "-c", "/usr/share/nginx/html/render-env.sh && nginx -g 'daemon off;' "]
