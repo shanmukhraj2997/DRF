@@ -180,6 +180,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://lms-frontend-w2ya.onrender.com"
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.onrender\.com$",
+]
+
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
