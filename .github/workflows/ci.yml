@@ -97,7 +97,7 @@ jobs:
             - name: Build and push backend image
               uses: docker/build-push-action@v5
               with:
-                context: ./backend/drf_project
+                context: ./drf_project
                 push: true
                 no-cache: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/lms-backend:latest
