@@ -170,17 +170,15 @@ CSRF_TRUSTED_ORIGINS = [
     "https://lms-frontend-w2ya.onrender.com"
 ]
 
-# Allow Render frontend subdomains dynamically, while still sending credentials safely.
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://.*\.onrender\.com$",
-    r"^http://localhost:5173$"
-]
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^http://localhost:5173$"
+# ]
 
 # CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-#     "https://lms-frontend-cuhs.onrender.com"
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://lms-frontend-w2ya.onrender.com"
+]
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
