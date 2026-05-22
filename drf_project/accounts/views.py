@@ -25,6 +25,9 @@ class DashboardView(APIView):
 
 
 class LoginView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
@@ -63,6 +66,9 @@ class LoginView(APIView):
         return response
     
 class RefreshView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
     def post(self, request):
         refresh_string = request.COOKIES.get("refresh_token")
 
